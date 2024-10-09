@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bspwhphonql24"]
+
+[ext_resource type="Script" path="res://scenes/giant_meteor/giant_meteor.gd" id="1_gusxv"]
+[ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_u7p6i"]
+[ext_resource type="Texture2D" uid="uid://bnyubdpoq8051" path="res://sprites/movable/GiantMeteor.png" id="2_ilgk3"]
+
+[sub_resource type="Curve" id="Curve_18cew"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.894737), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lpgxg"]
+curve = SubResource("Curve_18cew")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jd82w"]
+emission_shape = 1
+emission_sphere_radius = 88.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(100, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.8
+scale_max = 2.8
+scale_curve = SubResource("CurveTexture_lpgxg")
+color = Color(0.94902, 0.176471, 0.2, 0.0156863)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chcnf"]
+radius = 212.0
+height = 660.0
+
+[node name="GiantMeteor" type="Area2D"]
+position = Vector2(1609, 362)
+collision_mask = 3
+script = ExtResource("1_gusxv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_jd82w")
+texture = ExtResource("1_u7p6i")
+lifetime = 1.2
+trail_lifetime = 3.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_chcnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_ilgk3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

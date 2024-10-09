@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://cykehjjoe4unh"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_ho5v2"]
+[ext_resource type="FontFile" uid="uid://cec612itus8vk" path="res://Bubblegum.ttf" id="2_mknws"]
+[ext_resource type="Texture2D" uid="uid://b6mxxd8rd2vla" path="res://sprites/backgrounds/main_background.jpeg" id="3_8vuiy"]
+[ext_resource type="AudioStream" uid="uid://myhn0hvnb6uq" path="res://music/Relaxing Piano Music - Royalty Free - Familiar.mp3" id="4_rkn2w"]
+[ext_resource type="Texture2D" uid="uid://do0aympqbdava" path="res://sprites/main_menu/Game title.png" id="5_sgasc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj3d4"]
+atlas = ExtResource("3_8vuiy")
+region = Rect2(0, 0, 720, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtmxq"]
+atlas = ExtResource("3_8vuiy")
+region = Rect2(720, 0, 720, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuhqm"]
+atlas = ExtResource("3_8vuiy")
+region = Rect2(1440, 0, 720, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq4o0"]
+atlas = ExtResource("3_8vuiy")
+region = Rect2(2160, 0, 720, 720)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tpu4c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj3d4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtmxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuhqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq4o0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ptls"]
+bg_color = Color(0.0470588, 0.0470588, 0.027451, 0.670588)
+border_blend = true
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+corner_detail = 10
+
+[sub_resource type="Theme" id="Theme_tvesn"]
+Button/styles/normal = SubResource("StyleBoxFlat_3ptls")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ho5v2")
+
+[node name="Background1" type="AnimatedSprite2D" parent="."]
+position = Vector2(369, 360)
+scale = Vector2(1.04583, 1.00278)
+sprite_frames = SubResource("SpriteFrames_tpu4c")
+autoplay = "default"
+frame = 2
+frame_progress = 0.0189452
+
+[node name="Background2" type="AnimatedSprite2D" parent="."]
+position = Vector2(1122, 361)
+scale = Vector2(1.04583, 1.00278)
+sprite_frames = SubResource("SpriteFrames_tpu4c")
+autoplay = "default"
+frame_progress = 0.385152
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 489.0
+offset_top = 384.0
+offset_right = 759.0
+offset_bottom = 487.0
+theme = SubResource("Theme_tvesn")
+theme_override_fonts/font = ExtResource("2_mknws")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 491.0
+offset_top = 529.0
+offset_right = 761.0
+offset_bottom = 632.0
+theme = SubResource("Theme_tvesn")
+theme_override_fonts/font = ExtResource("2_mknws")
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rkn2w")
+autoplay = true
+
+[node name="GameTitle" type="Sprite2D" parent="."]
+position = Vector2(628, 169)
+texture = ExtResource("5_sgasc")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

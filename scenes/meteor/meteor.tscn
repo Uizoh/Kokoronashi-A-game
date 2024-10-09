@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5rundndikkth"]
+
+[ext_resource type="Script" path="res://scenes/meteor/meteor.gd" id="1_cdpx1"]
+[ext_resource type="Texture2D" uid="uid://dj8dphq80g3v3" path="res://sprites/movable/pixil-frame-0.png" id="1_coc5a"]
+[ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_wp8n8"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_qkgeu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vf1hq"]
+radius = 16.0
+
+[sub_resource type="Curve" id="Curve_pui48"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.894737), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vv77k"]
+curve = SubResource("Curve_pui48")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vurwl"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(80, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.18
+scale_max = 0.18
+scale_curve = SubResource("CurveTexture_vv77k")
+color = Color(0.94902, 0.980392, 1, 0.0196078)
+
+[node name="Meteor" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_cdpx1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+shape = SubResource("CircleShape2D_vf1hq")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_vurwl")
+texture = ExtResource("1_wp8n8")
+lifetime = 0.2
+trail_lifetime = 3.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_coc5a")
+script = ExtResource("3_qkgeu")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://tiyofvv12bt"]
+
+[ext_resource type="Texture2D" uid="uid://bqxecoq4olc5e" path="res://sprites/movable/player.png" id="1_hgyta"]
+[ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_k1ini"]
+[ext_resource type="Texture2D" uid="uid://samqpqn1vm7u" path="res://sprites/movable/player_cracked.png" id="2_r2rwf"]
+
+[sub_resource type="GDScript" id="GDScript_m1imj"]
+script/source = "extends CharacterBody2D
+
+const speed = 306;
+var direction = Vector2.ZERO;
+var playable: bool = true;
+
+func _ready():
+	pass
+
+
+func _process(_dt: float):
+	if playable:
+		direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\");
+		velocity = direction * speed;
+		move_and_slide();
+	
+	
+"
+
+[sub_resource type="Curve" id="Curve_dy0ub"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.894737), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mjxmc"]
+curve = SubResource("Curve_dy0ub")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kav3x"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(-600, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.18
+scale_max = 0.18
+scale_curve = SubResource("CurveTexture_mjxmc")
+color = Color(0.94902, 0.54902, 1, 0.0941176)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6fex"]
+radius = 113.018
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_35cnx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r2rwf")
+}],
+"loop": true,
+"name": &"cracked",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hgyta")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 1.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
+motion_mode = 1
+script = SubResource("GDScript_m1imj")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_kav3x")
+texture = ExtResource("1_k1ini")
+lifetime = 2.5
+trail_lifetime = 3.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+shape = SubResource("CircleShape2D_l6fex")
+
+[node name="State" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 0)
+sprite_frames = SubResource("SpriteFrames_35cnx")
+animation = &"cracked"
+autoplay = "normal"
