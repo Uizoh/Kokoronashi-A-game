@@ -13,4 +13,3 @@ func _ready():
 
 func _process(dt: float):
 	position += Vector2(speed * dt, vary * dt);
-

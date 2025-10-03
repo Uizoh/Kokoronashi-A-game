@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cykehjjoe4unh"]
 
-[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_ho5v2"]
+[ext_resource type="Script" uid="uid://ho2ahtd77tri" path="res://scenes/main/main.gd" id="1_ho5v2"]
 [ext_resource type="FontFile" uid="uid://cec612itus8vk" path="res://Bubblegum.ttf" id="2_mknws"]
 [ext_resource type="Texture2D" uid="uid://b6mxxd8rd2vla" path="res://sprites/backgrounds/main_background.jpeg" id="3_8vuiy"]
 [ext_resource type="AudioStream" uid="uid://myhn0hvnb6uq" path="res://music/Relaxing Piano Music - Royalty Free - Familiar.mp3" id="4_rkn2w"]

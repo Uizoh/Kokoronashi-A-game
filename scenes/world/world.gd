@@ -5,8 +5,8 @@ var time_game: float = 0;
 const meteor_scn = preload("res://scenes/meteor/meteor.tscn");
 const giant_meteor_src = preload("res://scenes/giant_meteor/giant_meteor.tscn");
 
-var callable: bool = true;
-var is_meteor_spawnable: bool = false;
+var callable: bool = true; # Used for calling a function once in process func
+var is_meteor_spawnable: bool = false; # Used to indicate how long meteors can spawn
 
 
 func _ready():
@@ -20,7 +20,7 @@ func _process(dt: float):
 	
 	
 	if time_game as int == 2 and callable:
-		companion1_enters();
+		#companion1_enters();
 		callable = false;
 	
 	
@@ -28,13 +28,10 @@ func _process(dt: float):
 	if time_game as int == 68 and callable:
 		is_meteor_spawnable = true;
 		callable = false;
-		$Companion1.set("is_following_player_behind", true);
 		meteor_barage(0.8, 1);
 	
 	
 	if time_game as int == 78 and callable:
-		$Companion1.set("is_following_player_behind", false);
-		$Companion1.set("is_following_player_infront", true);
 		is_meteor_spawnable = false;
 		callable = false;
 		
@@ -44,13 +41,13 @@ func _process(dt: float):
 		callable = false
 		
 
-func companion1_enters():
-	var tween = get_tree().create_tween();
-	tween.tween_property($Companion1, "position", Vector2(410, 500), 6);
-
-func companion2_enters():
-	var tween = get_tree().create_tween();
-	tween.tween_property($Companion2, "position", Vector2(856, 202), 4);
+#func companion1_enters():
+	#var tween = get_tree().create_tween();
+	#tween.tween_property($Companion1, "position", Vector2(410, 500), 6);
+#
+#func companion2_enters():
+	#var tween = get_tree().create_tween();
+	#tween.tween_property($Companion2, "position", Vector2(856, 202), 4);
 
 
 func meteor_barage(min_: float, max_: float):

@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://bnem326w5gtdo"]
 
-[ext_resource type="Script" path="res://scenes/world/world.gd" id="1_8kgbe"]
+[ext_resource type="Script" uid="uid://cotw5u0uj4mgp" path="res://scenes/world/world.gd" id="1_8kgbe"]
 [ext_resource type="PackedScene" uid="uid://bll4jju1dg7lx" path="res://scenes/bg/world_background.tscn" id="1_oc07d"]
 [ext_resource type="PackedScene" uid="uid://tiyofvv12bt" path="res://scenes/player/player.tscn" id="2_hqj2o"]
 [ext_resource type="AudioStream" uid="uid://ce1l2f6b8jyu6" path="res://music/SHUANG SHENG双笙 KOKORONASHI(心做し) LYRICS (JPNROMENG).mp3" id="2_kwlg7"]
 [ext_resource type="PackedScene" uid="uid://b5c6vjvqg8rka" path="res://scenes/player/companion_2.tscn" id="6_41qtv"]
 [ext_resource type="PackedScene" uid="uid://d1scpl0sgmumr" path="res://scenes/lyrics/lyrics.tscn" id="6_dg8lu"]
 [ext_resource type="PackedScene" uid="uid://wn6bgh34ibku" path="res://scenes/player/companion_1.tscn" id="6_nkfsu"]
-[ext_resource type="Script" path="res://scenes/world/Area2D.gd" id="7_54tnw"]
+[ext_resource type="Script" uid="uid://cm727leeho02i" path="res://scenes/world/Area2D.gd" id="7_54tnw"]
 [ext_resource type="Texture2D" uid="uid://b2mki1d38rrhu" path="res://sprites/backgrounds/black_screen.jpg" id="7_cgn1m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rd6op"]
@@ -67,9 +67,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgq3m"]
 _data = {
-"RESET": SubResource("Animation_bv8bq"),
-"blackscreen": SubResource("Animation_skl3h"),
-"start": SubResource("Animation_3j2p7")
+&"RESET": SubResource("Animation_bv8bq"),
+&"blackscreen": SubResource("Animation_skl3h"),
+&"start": SubResource("Animation_3j2p7")
 }
 
 [node name="World" type="Node2D"]
@@ -145,7 +145,7 @@ texture = ExtResource("7_cgn1m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BlackScreen"]
 libraries = {
-"": SubResource("AnimationLibrary_rgq3m")
+&"": SubResource("AnimationLibrary_rgq3m")
 }
 
 [node name="Lyrics" parent="." instance=ExtResource("6_dg8lu")]

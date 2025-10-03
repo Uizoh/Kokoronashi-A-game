@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://wn6bgh34ibku"]
+[gd_scene load_steps=12 format=3 uid="uid://wn6bgh34ibku"]
 
-[ext_resource type="Script" path="res://scenes/player/companion_1.gd" id="1_0q1fp"]
+[ext_resource type="Script" uid="uid://dcmxiqnoq13li" path="res://scenes/player/companion_1.gd" id="1_0q1fp"]
 [ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_3gf0x"]
 [ext_resource type="Texture2D" uid="uid://hv0cn15yxetn" path="res://sprites/movable/companion1_cracked.png" id="3_ikdae"]
 
@@ -16,10 +16,11 @@ curve = SubResource("Curve_sfj1h")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dsq6r"]
 particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-gravity = Vector3(-600, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 2000.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 0, 0)
 scale_min = 0.18
 scale_max = 0.18
 scale_curve = SubResource("CurveTexture_whswf")
@@ -36,6 +37,43 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="Animation" id="Animation_18sfj"]
+resource_name = "companion_movements"
+length = 100.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(5.5, 9.1),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(217.72, 751), Vector2(480, 540)]
+}
+
+[sub_resource type="Animation" id="Animation_gc2jd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(227, 751)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gumyn"]
+_data = {
+&"RESET": SubResource("Animation_gc2jd"),
+&"companion_movements": SubResource("Animation_18sfj")
+}
+
 [node name="Companion1" type="CharacterBody2D"]
 position = Vector2(227, 751)
 scale = Vector2(0.2, 0.2)
@@ -48,13 +86,19 @@ position = Vector2(6, -3)
 shape = SubResource("CircleShape2D_5dke3")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 300
-process_material = SubResource("ParticleProcessMaterial_dsq6r")
+amount = 320
 texture = ExtResource("1_3gf0x")
-lifetime = 2.5
+lifetime = 3.4
 trail_lifetime = 3.5
+process_material = SubResource("ParticleProcessMaterial_dsq6r")
 
 [node name="State" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u6ajb")
 animation = &"cracked"
 autoplay = "cracked"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gumyn")
+}
+autoplay = "companion_movements"
