@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cykehjjoe4unh"]
+[gd_scene load_steps=14 format=3 uid="uid://cykehjjoe4unh"]
 
 [ext_resource type="Script" uid="uid://ho2ahtd77tri" path="res://scenes/main/main.gd" id="1_ho5v2"]
 [ext_resource type="FontFile" uid="uid://cec612itus8vk" path="res://Bubblegum.ttf" id="2_mknws"]
@@ -54,6 +54,10 @@ corner_detail = 10
 [sub_resource type="Theme" id="Theme_tvesn"]
 Button/styles/normal = SubResource("StyleBoxFlat_3ptls")
 
+[sub_resource type="Theme" id="Theme_6q06x"]
+default_font = ExtResource("2_mknws")
+default_font_size = 36
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ho5v2")
 
@@ -95,10 +99,21 @@ text = "Exit"
 [node name="MainTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rkn2w")
 autoplay = true
+parameters/looping = true
 
 [node name="GameTitle" type="Sprite2D" parent="."]
 position = Vector2(628, 169)
 texture = ExtResource("5_sgasc")
+
+[node name="Version" type="RichTextLabel" parent="."]
+offset_left = 1163.0
+offset_top = 661.0
+offset_right = 1249.0
+offset_bottom = 701.0
+theme = SubResource("Theme_6q06x")
+theme_override_colors/font_outline_color = Color(0.99944, 0.307048, 0.486823, 1)
+theme_override_constants/outline_size = 12
+text = "v0.1"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

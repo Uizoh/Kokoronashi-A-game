@@ -7,7 +7,7 @@
 [sub_resource type="GDScript" id="GDScript_m1imj"]
 script/source = "extends CharacterBody2D
 
-const speed = 306;
+const speed = 162;
 var direction = Vector2.ZERO;
 var playable: bool = true;
 

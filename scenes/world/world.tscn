@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnem326w5gtdo"]
+[gd_scene load_steps=20 format=3 uid="uid://bnem326w5gtdo"]
 
 [ext_resource type="Script" uid="uid://cotw5u0uj4mgp" path="res://scenes/world/world.gd" id="1_8kgbe"]
 [ext_resource type="PackedScene" uid="uid://bll4jju1dg7lx" path="res://scenes/bg/world_background.tscn" id="1_oc07d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://wn6bgh34ibku" path="res://scenes/player/companion_1.tscn" id="6_nkfsu"]
 [ext_resource type="Script" uid="uid://cm727leeho02i" path="res://scenes/world/Area2D.gd" id="7_54tnw"]
 [ext_resource type="Texture2D" uid="uid://b2mki1d38rrhu" path="res://sprites/backgrounds/black_screen.jpg" id="7_cgn1m"]
+[ext_resource type="Texture2D" uid="uid://ctj08yfm8xa5v" path="res://sprites/controls_overlay/control.png" id="7_gb53w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rd6op"]
 radius = 69.0
@@ -19,7 +20,7 @@ radius = 69.0
 height = 824.0
 
 [sub_resource type="Animation" id="Animation_bv8bq"]
-length = 5.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,7 +28,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.8, 3.8, 4.8),
+"times": PackedFloat32Array(0, 2.56667, 3.6, 4.46667),
 "transitions": PackedFloat32Array(1, 1, 1, 2),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.941176), Color(1, 1, 1, 0.627451), Color(1, 1, 1, 0)]
@@ -72,8 +73,108 @@ _data = {
 &"start": SubResource("Animation_3j2p7")
 }
 
-[node name="World" type="Node2D"]
+[sub_resource type="Animation" id="Animation_5qq27"]
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlsSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.33333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gb53w"]
+resource_name = "control_tutorial"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 7.56667),
+"transitions": PackedFloat32Array(1, 0.517632, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.06667, 3.76667, 5.86667, 7.53333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.1, 7.53333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(120, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlabj"]
+_data = {
+&"RESET": SubResource("Animation_5qq27"),
+&"control_tutorial": SubResource("Animation_gb53w")
+}
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("PLAYER", "COMPANION1", "COMPANION2")]
 script = ExtResource("1_8kgbe")
+PLAYER = NodePath("Player")
+COMPANION1 = NodePath("Companion1")
+COMPANION2 = NodePath("Companion2")
 
 [node name="WorldBackground" parent="." instance=ExtResource("1_oc07d")]
 
@@ -87,11 +188,6 @@ script = ExtResource("7_54tnw")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MeteorDeletor"]
 position = Vector2(-45.4858, -54.9946)
 polygon = PackedVector2Array(1596.49, -72.0054, -168.514, -72.0054, -149.514, 953.995, 1683.49, 979.995, 1729.49, 1038.99, -208.514, 1038.99, -231.514, -123.005, 1712.49, -154.005)
-
-[node name="Callabler" type="Timer" parent="."]
-process_callback = 0
-wait_time = 2.0
-autostart = true
 
 [node name="MovementLimiter" type="StaticBody2D" parent="."]
 light_mask = 2
@@ -130,12 +226,6 @@ shape = SubResource("CapsuleShape2D_rd6op")
 one_way_collision_margin = 13.9
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Player" parent="." instance=ExtResource("2_hqj2o")]
-position = Vector2(324, 263)
-collision_mask = 7
-
-[node name="Companion1" parent="." instance=ExtResource("6_nkfsu")]
-
 [node name="BlackScreen" type="Sprite2D" parent="."]
 top_level = true
 light_mask = 0
@@ -152,7 +242,27 @@ libraries = {
 top_level = true
 position = Vector2(640, 664)
 
+[node name="ControlsTutorial" type="Node2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsTutorial"]
+libraries = {
+&"": SubResource("AnimationLibrary_dlabj")
+}
+autoplay = "control_tutorial"
+
+[node name="ControlsSprite" type="Sprite2D" parent="ControlsTutorial"]
+position = Vector2(451, 401)
+scale = Vector2(0.568125, 0.568125)
+texture = ExtResource("7_gb53w")
+
+[node name="Player" parent="." instance=ExtResource("2_hqj2o")]
+position = Vector2(324, 263)
+collision_mask = 7
+
+[node name="Companion1" parent="." instance=ExtResource("6_nkfsu")]
+
 [node name="Companion2" parent="." instance=ExtResource("6_41qtv")]
+position = Vector2(1040, -90)
 
 [connection signal="body_entered" from="MeteorDeletor" to="MeteorDeletor" method="_on_body_entered"]
-[connection signal="timeout" from="Callabler" to="." method="_on_callabler_timeout"]
