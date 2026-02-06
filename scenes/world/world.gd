@@ -4,6 +4,7 @@ var time_game: float = 0;
 var rng = RandomNumberGenerator.new();
 
 const end_title_scn = preload("res://scenes/end_credits/end_credits.tscn");
+const game_end_buttons_scn = preload("res://scenes/game_end_buttons/game_end_buttons.tscn");
 
 # Player and Companion vars
 @export var PLAYER: CharacterBody2D;
@@ -33,10 +34,10 @@ var companion2_state: CompanionState = CompanionState.NOT_FOLLOWING;
 
 const offset_x: Vector2 = Vector2(120, 0); # for front and back only
 
-var offset_fd = Vector2(rng.randi_range(80, 180), rng.randi_range(90, 160)); # front down
-var offset_fu = Vector2(rng.randi_range(54, 188), rng.randi_range(-160, -50));# front up
-var offset_bd = Vector2(rng.randi_range(-160, -68), rng.randi_range(60, 160)); # back down
-var offset_bu = Vector2(rng.randi_range(-160, -72), rng.randi_range(-160, -78)); # back up
+var offset_fd = Vector2(rng.randi_range(80, 160), rng.randi_range(90, 140)); # front down
+var offset_fu = Vector2(rng.randi_range(54, 160), rng.randi_range(-140, -50));# front up
+var offset_bd = Vector2(rng.randi_range(-160, -68), rng.randi_range(60, 140)); # back down
+var offset_bu = Vector2(rng.randi_range(-160, -72), rng.randi_range(-140, -78)); # back up
 
 # Meteor vars
 const meteor_scn = preload("res://scenes/meteor/meteor.tscn");
@@ -57,7 +58,7 @@ var meteor_events := [
 	{ time = 140, state = MeteorState.SPAWNABLE, min = 0.8, max = 1.0, done = false },
 	{ time = 150, state = MeteorState.SPAWNABLE, min = 0.2, max = 0.6, done = false },
 	{ time = 162, state = MeteorState.NOT_SPAWNABLE, min = 100, max = 100, done = false },
-	{ time = 210, state = MeteorState.SPAWNABLE, min = 0.2, max = 0.6, done = false },
+	{ time = 210, state = MeteorState.SPAWNABLE, min = 0.4, max = 0.6, done = false },
 	{ time = 220, state = MeteorState.NOT_SPAWNABLE, min = 100, max = 100, done = false },
 ];
 
@@ -73,6 +74,7 @@ var one_time_events := [
 	{ time = 238, fun = stop_player_controls, done = false },
 	{ time = 250, fun = end_move_forward, done = false },
 	{ time = 266, fun = roll_end_credits, done = false },
+	{ time = 280, fun = spawn_game_end_buttons, done = false },
 ];
 
 
@@ -132,7 +134,9 @@ func _ready():
 		{ time = 212.0, state = CompanionState.FOLLOWING_FRONT_UP, done = false },
 		{ time = 214.0, state = CompanionState.FOLLOWING_FRONT, done = false },
 		{ time = 215.0, state = CompanionState.FOLLOWING_FRONT_DOWN, done = false },
-		{ time = 219.0, state = CompanionState.FOLLOWING_FRONT, done = false },
+		{ time = 221.0, state = CompanionState.FOLLOWING_FRONT, done = false },
+		{ time = 232.0, state = CompanionState.FOLLOWING_FRONT_UP, done = false },
+		{ time = 236.0, state = CompanionState.FOLLOWING_FRONT_DOWN, done = false },
 		{ time = 238.0, state = CompanionState.TOGETHER, done = false },
 	];
 
@@ -235,7 +239,7 @@ func companion_follow_together(companion: CharacterBody2D):
 	var slowdown_radius: float = 60.0;
 	var t: Variant = clamp(distance / slowdown_radius, 0.2, 1.0);
 	
-	companion.velocity = direction.normalized() * comp_speed * t;
+	companion.velocity = direction.normalized() * (comp_speed + 100) * t;
 
 
 func companion_follow_front(companion: CharacterBody2D):
@@ -330,15 +334,18 @@ func companion_follow_back(companion: CharacterBody2D):
 func stop_player_controls():
 	$Player.playable = false;
 	var tween = get_tree().create_tween();
-	tween.tween_property(PLAYER, "position", Vector2(540, 324), 4);
+	tween.tween_property(PLAYER, "position", Vector2(540, 324), 8);
 
 func end_move_forward():
 	var tween = get_tree().create_tween();
-	tween.tween_property(PLAYER, "position", Vector2(1352, 324), 28);
+	tween.tween_property(PLAYER, "position", Vector2(1352, 324), 32);
 
 
 func roll_end_credits():
 	add_child(end_title_scn.instantiate());
+
+func spawn_game_end_buttons():
+	add_child(game_end_buttons_scn.instantiate());
 
 
 func _handle_companion1_events():

@@ -11,15 +11,18 @@ config_version=5
 [application]
 
 config/name="Kokoronashi: A game"
+config/version="0.2"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0.136826, 0.136826, 0.136826, 1)
-config/icon="res://icon.svg"
+config/icon="uid://dj8dphq80g3v3"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/sharp_corners=true
+window/stretch/mode="canvas_items"
 
 [filesystem]
 

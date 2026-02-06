@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b5rundndikkth"]
 
 [ext_resource type="Script" uid="uid://dsko3jk7upnxm" path="res://scenes/meteor/meteor.gd" id="1_cdpx1"]
-[ext_resource type="Texture2D" uid="uid://dj8dphq80g3v3" path="res://sprites/movable/pixil-frame-0.png" id="1_coc5a"]
+[ext_resource type="Texture2D" uid="uid://dj8dphq80g3v3" path="res://sprites/movable/meteor.png" id="1_coc5a"]
 [ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_wp8n8"]
 [ext_resource type="Script" uid="uid://me5ec166d6bv" path="res://scenes/meteor/Sprite2D.gd" id="3_qkgeu"]
 

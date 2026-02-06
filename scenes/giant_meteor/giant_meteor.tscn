@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ufmjlh0vdg8t" path="res://scenes/giant_meteor/giant_meteor.gd" id="1_gusxv"]
 [ext_resource type="Texture2D" uid="uid://c8hsvnqpw8nyi" path="res://addons/kenney_particle_pack/circle_05.png" id="1_u7p6i"]
-[ext_resource type="Texture2D" uid="uid://bnyubdpoq8051" path="res://sprites/movable/GiantMeteor.png" id="2_ilgk3"]
+[ext_resource type="Texture2D" uid="uid://bnyubdpoq8051" path="res://sprites/movable/giant_meteor.png" id="2_ilgk3"]
 
 [sub_resource type="Curve" id="Curve_18cew"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.894737), 0.0, 0.0, 0, 0]
@@ -39,10 +39,11 @@ trail_lifetime = 3.5
 process_material = SubResource("ParticleProcessMaterial_jd82w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.92, 1.04)
 shape = SubResource("CapsuleShape2D_chcnf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
+rotation = 4.71195
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("2_ilgk3")
 

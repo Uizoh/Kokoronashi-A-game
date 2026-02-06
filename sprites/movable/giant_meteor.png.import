@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnyubdpoq8051"
-path="res://.godot/imported/GiantMeteor.png-e7dd67581600f7eb6a063d16b4d11971.ctex"
+path="res://.godot/imported/giant_meteor.png-b7f2aedbdb896ceb15135e191908295d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/movable/GiantMeteor.png"
-dest_files=["res://.godot/imported/GiantMeteor.png-e7dd67581600f7eb6a063d16b4d11971.ctex"]
+source_file="res://sprites/movable/giant_meteor.png"
+dest_files=["res://.godot/imported/giant_meteor.png-b7f2aedbdb896ceb15135e191908295d.ctex"]
 
 [params]
 

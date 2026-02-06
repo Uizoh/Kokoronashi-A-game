@@ -11,7 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 		get_node("../Player/State").play("cracked");
 		$".".queue_free();
 		
-	if body == get_node("../Companion1"):
+	if  body == get_node("../Companion1"):
 		get_node("../BlackScreen/AnimationPlayer").play("blackscreen");
 		get_node("../Companion1").queue_free();
 		$".".queue_free();

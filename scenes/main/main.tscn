@@ -113,7 +113,7 @@ offset_bottom = 701.0
 theme = SubResource("Theme_6q06x")
 theme_override_colors/font_outline_color = Color(0.99944, 0.307048, 0.486823, 1)
 theme_override_constants/outline_size = 12
-text = "v0.1"
+text = "v0.2"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

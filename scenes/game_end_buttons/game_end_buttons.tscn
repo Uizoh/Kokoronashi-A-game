@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfhpri2c8cn2y"]
+
+[ext_resource type="FontFile" uid="uid://cec612itus8vk" path="res://Bubblegum.ttf" id="1_3ebjm"]
+[ext_resource type="Script" uid="uid://chac8monroiny" path="res://scenes/game_end_buttons/game_end_buttons.gd" id="1_b63nf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b63nf"]
+bg_color = Color(0.0470588, 0.0470588, 0.027451, 0.670588)
+border_blend = true
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+corner_detail = 10
+
+[sub_resource type="Theme" id="Theme_wvnfs"]
+Button/styles/normal = SubResource("StyleBoxFlat_b63nf")
+
+[sub_resource type="Animation" id="Animation_8out7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8drds"]
+resource_name = "button_fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_owowv"]
+_data = {
+&"RESET": SubResource("Animation_8out7"),
+&"button_fade_in": SubResource("Animation_8drds")
+}
+
+[node name="GameEndButtons" type="Node2D"]
+script = ExtResource("1_b63nf")
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 260.0
+offset_top = 480.0
+offset_right = 530.0
+offset_bottom = 584.0
+theme = SubResource("Theme_wvnfs")
+theme_override_fonts/font = ExtResource("1_3ebjm")
+theme_override_font_sizes/font_size = 40
+text = "Main Menu"
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 750.0
+offset_top = 480.0
+offset_right = 1020.0
+offset_bottom = 584.0
+theme = SubResource("Theme_wvnfs")
+theme_override_fonts/font = ExtResource("1_3ebjm")
+theme_override_font_sizes/font_size = 40
+text = "Exit?"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_owowv")
+}
+autoplay = "button_fade_in"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
